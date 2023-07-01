@@ -1,8 +1,10 @@
 package org.example.Colecciones;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class Articulos {
     long id;
@@ -26,15 +28,13 @@ public class Articulos {
         this.listaEtiquetas = listaEtiquetas;
     }
 
-    public Articulos(long id, String titulo, String cuerpo, Usuario autor, LocalDate fecha, List<String> listaEtiquetas){
+    public Articulos(long id, String titulo, String cuerpo, Usuario autor, LocalDate fecha){
         this.id = id;
         this.autor = autor;
         this.cuerpo = cuerpo;
         this.fecha = fecha;
         this.titulo = titulo;
-        this.listaEtiquetas = listaEtiquetas;
-
-
+        this.listaComentarios = new ArrayList<>();
     }
 
     public long getId() {
@@ -53,10 +53,9 @@ public class Articulos {
         return listaEtiquetas;
     }
 
-    public void setListaEtiquetas(List<String> listaEtiquetas) {
-        this.listaEtiquetas = listaEtiquetas;
+    public void setListaEtiqueta(List<String> listaEtiqueta) {
+        listaEtiquetas = listaEtiqueta;
     }
-
     public void setListaComentarios(List<Comentario> listaComentarios) {
         this.listaComentarios = listaComentarios;
     }
@@ -97,5 +96,7 @@ public class Articulos {
         cuerpo = tmp.getCuerpo();
         fecha = tmp.getFecha();
         titulo = tmp.getTitulo();
+        listaEtiquetas = tmp.getListaEtiquetas();
+
     }
 }

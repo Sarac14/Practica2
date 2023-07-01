@@ -2,8 +2,7 @@ package org.example;
 
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
-import org.example.controladores.ControladorLogin;
-import org.example.controladores.PlantillasControlador;
+import org.example.controladores.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,7 +20,10 @@ public class Main {
         app.start(8000);
 
 
-        new ControladorLogin(app).aplicarRutas();
+        new ControladorInicio(app).aplicarRutas();
+        new ControladorArticulo(app).aplicarRutas();
+        new ControladorComentario(app).aplicarRutas();
+        new ControladorUsuario(app).aplicarRutas();
         new PlantillasControlador(app).aplicarRutas();
 
     }

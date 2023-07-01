@@ -1,5 +1,7 @@
 package org.example.servicios;
 
+import org.example.Colecciones.Articulos;
+import org.example.Colecciones.Comentario;
 import org.example.Colecciones.Usuario;
 
 import java.util.ArrayList;
@@ -8,12 +10,16 @@ import java.util.List;
 public class ServicioUsuario {
     private static ServicioUsuario instancia;
     private static List<Usuario> listaUsuarios = new ArrayList<>();
+
     private Usuario usuarioLogeado;
 
 
     private ServicioUsuario(){
-        listaUsuarios.add(new Usuario("admin", "admin", "admin", true, true));
-        listaUsuarios.add(new Usuario("sara", "sara", "sara", false, true));
+        listaUsuarios.add(new Usuario("admin", "admin Administrador", "admin", true, true));
+        listaUsuarios.add(new Usuario("sara", "sara Contreras", "sara", false, true));
+        listaUsuarios.add(new Usuario("user", "Juan Perez", "1234", false, true));
+
+        setUsuarioLogeado(new Usuario("admin", "admin Administrador", "admin", true, true));
     }
 
     public static ServicioUsuario getInstancia(){
@@ -85,4 +91,27 @@ public class ServicioUsuario {
         Usuario tmp = buscarUsuarioPorUsername(username);
         return tmp;
     }
+
+    public Usuario actualizarUsuario(Usuario usuario) {
+        Usuario tmp = getUsuarioPorUsuario(usuario.getUsuario());
+        if(tmp == null) {
+            System.out.println("ERROR");
+            return null;
+        }
+        System.out.println("Usuario actualizado correctamente");
+        tmp.actualizar(usuario);
+        return usuario;
+    }
+
+    public boolean eliminar(String usuario) {
+        Usuario tmp = getUsuarioPorUsuario(usuario);
+        if(tmp==null) {
+            System.out.println("ERROR");
+            return false;
+        }
+        System.out.println("Usuario eliminado");
+        listaUsuarios.remove(tmp);
+        return true;
+    }
+
 }

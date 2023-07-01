@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -25,7 +25,8 @@
                 <div class="col-12 col-sm-5 col-md-6 text-start" style="margin: 0px;padding: 5px 15px;">
                     <p class="text-primary m-0 fw-bold">Usuarios</p>
                 </div>
-                <div class="col-12 col-sm-7 col-md-6 text-end" style="margin: 0px;padding: 5px 15px;"><button class="btn btn-primary btn-sm reset" type="button" style="margin: 2px;">Borrar Filtros</button><button class="btn btn-warning btn-sm" id="zoom_in" type="button" zoomclick="ChangeZoomLevel(-10);" style="margin: 2px;"><i class="fa fa-search-plus"></i></button><button class="btn btn-warning btn-sm" id="zoom_out" type="button" zoomclick="ChangeZoomLevel(-10);" style="margin: 2px;"><i class="fa fa-search-minus"></i></button></div>
+                <div class="col-12 col-sm-6 col-md-6 offset-lg-6 text-end" style="margin-bottom: 30px;"><a class="btn btn-primary" role="button" href="/">Inicio</a></div>
+
             </div>
         </div>
         <div class="row">
@@ -36,22 +37,20 @@
                         <tr>
                             <th class="text-center">Nombre</th>
                             <th class="text-center">Username</th>
-                            <th class="text-center">Contraseña</th>
+                            <th class="text-center">Password</th>
                             <th class="text-center filter-false sorter-false">Acciones</th>
                         </tr>
                         </thead>
                         <tbody class="text-center">
-                        <tr>
-                            <td>Ana</td>
-                            <td>Diseñador</td>
-                            <td>Diseño</td>
-                            <td class="text-center align-middle" style="max-height: 60px;height: 60px;"><a class="btn btnMaterial btn-flat primary semicircle" role="button" href="#"></a><a class="btn btnMaterial btn-flat success semicircle" role="button" style="color: green" href="#">Editar</a><a class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover" role="button" style="margin-left: 5px; color: red" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#">Borrar</a></td>
-                        </tr>
-                        <tr>
-                            <td>Fer<br></td>
-                            <td>Desarrollador</td>
-                            <td>Development</td>
-                            <td class="text-center align-middle" style="max-height: 60px;height: 60px;"><a class="btn btnMaterial btn-flat primary semicircle" role="button" href="#"></a><a class="btn btnMaterial btn-flat success semicircle" role="button" style="color: green" href="#">Editar</a><a class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover" role="button" style="margin-left: 5px; color: red;" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#">Borrar</a></td>
+                        <tr th:each="usuario : ${lista}">
+                            <td th:text="${usuario.Nombre}">Ana</td>
+                            <td th:text="${usuario.username}">Diseñador</td>
+                            <td th:text="${usuario.password}">Diseñador</td>
+                            <td class="text-center align-middle" style="max-height: 60px;height: 60px;">
+                                <a class="btn btnMaterial btn-flat primary semicircle" role="button" href="#"></a>
+                                <a class="btn btnMaterial btn-flat success semicircle" role="button" style="color: green" th:href="'/editarUsuario/'+${usuario.username}">Editar</a>
+                                <a class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover" role="button" style="margin-left: 5px; color: red" data-bs-toggle="modal" data-bs-target="#delete-modal" th:href="'/eliminarUsuario/'+${usuario.username}">Borrar</a>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
